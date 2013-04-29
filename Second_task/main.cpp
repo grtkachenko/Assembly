@@ -2,10 +2,10 @@
 #include <time.h>
 #include <stdio.h>
 #include <unistd.h>
-const int NUM_MATRIX = 1000000;
+const int NUM_MATRIX = 1;
 extern "C" {
-    void FDCT(float * in, float * out, int N);
-    void IDCT(float * in, float * out, int N);
+    void fdct(float * in, float * out, int N);
+    void idct(float * in, float * out, int N);
 }
 float data[64 * NUM_MATRIX] __attribute__ ((aligned (16))), data2[64 * NUM_MATRIX]__attribute__ ((aligned (16))) ;
 int main() {
@@ -38,8 +38,10 @@ int main() {
         }
 
     }
-    IDCT(in, out, NUM_MATRIX);
-    for (int num_t = 0; num_t < 1; num_t++) {
+    for (int i = 0; i < NUM_MATRIX * 100; i++) {
+        idct(in, out, NUM_MATRIX);
+    }
+    for (int num_t = 0; num_t < 0; num_t++) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 printf("%.3f ", out[num_t * 64 + i * 8 + j]);    

@@ -2,8 +2,8 @@ extern _printf
 extern _exit
 
 section .text
-global _IDCT
-_IDCT:
+global _idct
+_idct:
     rdtsc
     mov [start], eax
 ;__________________________________________________
@@ -22,7 +22,6 @@ _IDCT:
 		movaps xmm3, [eax + 16]
 
 		help_row_loop_idct:
-			; helpa[dx][cx] += scal_mul(a[cx], precalD[dx])
 			add esi, 32
 			movaps xmm2, [ebx]
 			dpps xmm2, xmm0, 0xff
@@ -53,7 +52,6 @@ _IDCT:
 		mov cx, 8
 		movaps xmm3, [eax + 16]
 		help_col_loop_idct:
-			;a[u][j] += helpa[j][i] * precalcD[u][i];
 			movaps xmm2, [ebx]
 			dpps xmm2, xmm0, 0xff
 			add esi, 32
@@ -95,8 +93,8 @@ _IDCT:
     ret
 
 ;=================================================================================================================================================================
-global _FDCT
-_FDCT:
+global _fdct
+_fdct:
     rdtsc
     mov [start], eax
 ;__________________________________________________
