@@ -1,3 +1,4 @@
 ..git*
+*.un~
 Temp
 .DS_Store
